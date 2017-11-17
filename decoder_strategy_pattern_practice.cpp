@@ -85,24 +85,12 @@ public:
     Decoder *decoder = NULL;
 
     switch (decoder_type) {
-      case Decoder::kMp3Decoder: {
-        // retrive args
-        int         arg1 = va_arg(var_list, int);
-        std::string arg2 = va_arg(var_list, char *);
-        
-        // create instance of Mp3Decoder
-        decoder = new (std::nothrow) Mp3Decoder(arg1, arg2);
+      case Decoder::kMp3Decoder: 
+        decoder = CreateMp3Decoder(var_list);
         break;
-      }
-      
+
       case Decoder::kWavDecoder: {
-        // retrive args
-        int arg1 = va_arg(var_list, int);
-        int arg2 = va_arg(var_list, int);
-        int arg3 = va_arg(var_list, int);
-        
-        // create instance of WavDecoder
-        decoder = new (std::nothrow) WavDecoder(arg1, arg2, arg3);
+        decoder = CreateWavDecoder(var_list);
         break;
       }
       
@@ -110,8 +98,28 @@ public:
         printf("Opps! Program should not arrive here...\n");
         break;
     }
-    
+
     return decoder;
+  }
+
+private:
+  static Mp3Decoder *CreateMp3Decoder(va_list var_list) {
+    // retrive args
+    int         arg1 = va_arg(var_list, int);
+    std::string arg2 = va_arg(var_list, char *);
+    
+    // create instance of Mp3Decoder
+    return  new (std::nothrow) Mp3Decoder(arg1, arg2);
+  }
+  
+  static WavDecoder *CreateWavDecoder(va_list var_list) {
+    // retrive args
+    int arg1 = va_arg(var_list, int);
+    int arg2 = va_arg(var_list, int);
+    int arg3 = va_arg(var_list, int);
+    
+    // create instance of WavDecoder
+    return new (std::nothrow) WavDecoder(arg1, arg2, arg3);
   }
 };
 #endif
