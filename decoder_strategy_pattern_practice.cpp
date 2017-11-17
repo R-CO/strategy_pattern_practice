@@ -130,7 +130,12 @@ public:
   DecoderManager(Decoder::DecoderType decoder_type, ...)
     : decoder_(NULL)
   {
-#if !RCO_SIMPLE_DECODER_FACTORY
+#if RCO_SIMPLE_DECODER_FACTORY
+  va_list   var_list;
+  va_start(var_list, decoder_type);
+  decoder_ = SimpleDecoderFactory::CreateDecoder(decoder_type, var_list);
+  va_end(var_list);
+#else
     switch (decoder_type) {
       case Decoder::kMp3Decoder: {
         va_list   var_list;
@@ -165,11 +170,6 @@ public:
         printf("Opps! Program should not arrive here...\n");
         break;
     }
-#else
-  va_list   var_list;
-  va_start(var_list, decoder_type);
-  decoder_ = SimpleDecoderFactory::CreateDecoder(decoder_type, var_list);
-  va_end(var_list);
 #endif
   }
   
