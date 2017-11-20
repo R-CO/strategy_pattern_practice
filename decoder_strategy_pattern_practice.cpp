@@ -47,15 +47,15 @@ private:
   int         arg1_;
   std::string arg2_;
   
-  // not allowed default constructor
+  // disable default constructor
   Mp3Decoder() {
   }
   
-  // not allowed copy constructor
+  // disable copy constructor
   Mp3Decoder(const Mp3Decoder &) {
   }
   
-  // not allowed assigned operator
+  // disable assigned operator
   Mp3Decoder& operator=(const Mp3Decoder &) {
   }
 };
@@ -82,15 +82,15 @@ private:
   int arg2_;
   int arg3_;
   
-  // not allowed default constructor
+  // disable default constructor
   WavDecoder() {
   }
   
-  // not allowed copy constructor
+  // disable copy constructor
   WavDecoder(const WavDecoder &) {
   }
   
-  // not allowed assigned operator
+  // disable assigned operator
   WavDecoder& operator=(const WavDecoder &) {
   }
 };
@@ -219,7 +219,7 @@ int main(int argc, char *argv[])
   rco::DecoderManager wav_decoder(rco::Decoder::kWavDecoder, 9, 4, 6);
   wav_decoder.decode();
 
-#ifdef WIN32 && _DEBUG
+#if defined(WIN32) && defined(_DEBUG)
   system("pause");
 #endif
   return EXIT_SUCCESS;
