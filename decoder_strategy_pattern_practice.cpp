@@ -19,6 +19,10 @@ public:
     kWavDecoder
   };
 
+  virtual ~Decoder() {
+    // do nothing
+  }
+
   virtual void excute() = 0;
 private:
 };
@@ -95,7 +99,7 @@ public:
       }
       
       default:
-        printf("Opps! Program should not arrive here...\n");
+        printf("Oops! Program should not arrive here...\n");
         break;
     }
 
