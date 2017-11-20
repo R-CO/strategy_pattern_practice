@@ -30,7 +30,7 @@ private:
 class Mp3Decoder : public Decoder
 {
 public:
-  Mp3Decoder(int arg1, std::string arg2) 
+  Mp3Decoder(int arg1, const std::string &arg2) 
     : arg1_(arg1), arg2_(arg2) 
   {
     // do something
@@ -49,6 +49,14 @@ private:
   
   // not allowed default constructor
   Mp3Decoder() {
+  }
+  
+  // not allowed copy constructor
+  Mp3Decoder(const Mp3Decoder &) {
+  }
+  
+  // not allowed assigned operator
+  Mp3Decoder& operator=(const Mp3Decoder &) {
   }
 };
 
@@ -76,6 +84,14 @@ private:
   
   // not allowed default constructor
   WavDecoder() {
+  }
+  
+  // not allowed copy constructor
+  WavDecoder(const WavDecoder &) {
+  }
+  
+  // not allowed assigned operator
+  WavDecoder& operator=(const WavDecoder &) {
   }
 };
 
